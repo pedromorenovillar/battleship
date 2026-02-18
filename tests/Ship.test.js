@@ -1,7 +1,5 @@
 import Ship from "../src/Ship.js";
 
-// length
-// number of hits
 // isSunk?
 
 describe("Ship", () => {
@@ -14,4 +12,10 @@ describe("Ship", () => {
     ship.hit();
     expect(ship.hits).toBe(1);
   });
+  it("knows when it is sunk", ()=> {
+    const ship = new Ship(2);
+    ship.hit();
+    ship.hit();
+    expect(ship.isSunk()).toBe(true);
+  })
 });
