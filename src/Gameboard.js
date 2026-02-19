@@ -35,6 +35,9 @@ class Gameboard {
   }
   receiveAttack(x, y) {
     const cell = this.board[x][y]
+    if (cell && cell.isHit) {
+      return
+    }
     if(cell instanceof Ship) {
       cell.hit()
       this.board[x][y] = { ship: cell, isHit: true };
