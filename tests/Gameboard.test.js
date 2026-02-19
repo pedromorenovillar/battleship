@@ -17,7 +17,9 @@ describe("Gameboard", () => {
       expect(row.length).toBe(10);
     });
   });
-  
+  it("initializes all cells as empty", () => {
+  expect(gameboard.board[0][0]).toBe(null);
+});
   it("places ships at coordinates", () => {});
   it("prevents ships from going off board", () => {});
   it("prevents ships from overlapping", () => {});
