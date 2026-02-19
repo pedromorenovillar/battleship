@@ -7,6 +7,9 @@ class Gameboard {
     }
   }
   placeShip(ship, x, y) {
+    if (y + ship.length > 10) {
+      throw Error("Cannot place ship outside board.");
+    }
     for (let i = 0; i < ship.length; i++) {
       this.board[x][y + i] = ship;
     }
