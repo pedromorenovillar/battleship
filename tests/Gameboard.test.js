@@ -19,13 +19,14 @@ describe("Gameboard", () => {
     });
   });
   it("initializes all cells as empty", () => {
-  expect(gameboard.board[0][0]).toBe(null);
-});
+    expect(gameboard.board[0][0]).toBe(null);
+  });
   it("places ships at coordinates", () => {
-    const ship = new Ship(2)
-    gameboard.placeShip(ship, 0, 0)
+    const ship = new Ship(2);
+    gameboard.placeShip(ship, 0, 0);
 
-    expect(gameboard.board[0][0]).toBe(ship)
+    expect(gameboard.board[0][0]).toBe(ship);
+    expect(gameboard.board[0][1]).toBe(ship);
   });
   it("prevents ships from going off board", () => {});
   it("prevents ships from overlapping", () => {});
