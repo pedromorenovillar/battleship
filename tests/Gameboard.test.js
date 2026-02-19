@@ -48,5 +48,12 @@ describe("Gameboard", () => {
     expect(gameboard.board[1][0]).toBe(ship);
   });
   it("tracks missed attacks", () => {});
-  it("tracks hit attacks", () => {});
+  it("tracks hit attacks", () => {
+    const ship = new Ship(2)
+    gameboard.placeShip(ship, 0, 0)
+
+    gameboard.receiveAttack(0,0)
+    expect(ship.hits).toBe(1)
+    expect(gameboard.board[0][0]).toBe(ship)
+  });
 });
