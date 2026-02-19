@@ -37,6 +37,7 @@ class Gameboard {
     const cell = this.board[x][y]
     if(cell instanceof Ship) {
       cell.hit()
+      this.board[x][y] = { ship: cell, isHit: true };
     } else {
       this.missedAttacks.push([x, y])
     }
