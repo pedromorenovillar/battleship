@@ -22,7 +22,7 @@ describe("Gameboard", () => {
   it("initializes all cells as empty", () => {
     expect(gameboard.board[0][0]).toBe(null);
   });
-  it("places ships at coordinates", () => {
+  it("places ships horizontally at coordinates", () => {
     const ship = new Ship(2);
     gameboard.placeShip(ship, 0, 0);
 
@@ -42,6 +42,13 @@ describe("Gameboard", () => {
     expect(() => {
       gameboard.placeShip(ship2, 0, 0);
     }).toThrow();
+  });
+  it("places ships vertically at coordinates", () => {
+    const ship = new Ship(2);
+    gameboard.placeShip(ship, 0, 0, "vertical");
+
+    expect(gameboard.board[0][0]).toBe(ship);
+    expect(gameboard.board[1][0]).toBe(ship);
   });
   it("tracks missed attacks", () => {});
   it("tracks hit attacks", () => {});
