@@ -53,6 +53,7 @@ describe("Gameboard", () => {
     gameboard.placeShip(ship, 0, 0)
 
     gameboard.receiveAttack(0,0)
+    
     expect(ship.hits).toBe(1)
     expect(gameboard.board[0][0]).toBe(ship)
   });

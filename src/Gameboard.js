@@ -1,3 +1,5 @@
+import Ship from "./Ship";
+
 class Gameboard {
   constructor() {
     this.board = [];
@@ -28,6 +30,12 @@ class Gameboard {
       const row = start + dStart * i;
       const col = end + dEnd * i;
       this.board[row][col] = ship;
+    }
+  }
+  receiveAttack(x, y) {
+    const cell = this.board[x][y]
+    if(cell instanceof Ship) {
+      cell.hit()
     }
   }
 }
