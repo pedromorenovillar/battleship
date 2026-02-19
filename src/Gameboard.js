@@ -2,6 +2,7 @@ import Ship from "./Ship";
 
 class Gameboard {
   constructor() {
+    this.missedAttacks = []
     this.board = [];
     for (let i = 0; i < 10; i++) {
       let row = new Array(10).fill(null);
@@ -36,6 +37,8 @@ class Gameboard {
     const cell = this.board[x][y]
     if(cell instanceof Ship) {
       cell.hit()
+    } else {
+      this.missedAttacks.push([x, y])
     }
   }
 }
