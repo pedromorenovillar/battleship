@@ -58,7 +58,8 @@ describe("Gameboard", () => {
     gameboard.receiveAttack(0, 0);
 
     expect(ship.hits).toBe(1);
-    expect(gameboard.board[0][0]).toBe(ship);
+    expect(gameboard.board[0][0].ship).toBe(ship);
+    expect(gameboard.board[0][0].isHit).toBe(true);
   });
   it("marks ship as sunk if all parts are hit", () => {
     const ship = new Ship(2);
