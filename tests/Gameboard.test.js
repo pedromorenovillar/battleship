@@ -17,9 +17,10 @@ describe("Gameboard", () => {
       expect(row.length).toBe(10);
     });
   });
-  it.todo("places ships at coordinates", () => {});
-  it.todo("prevents ships from going off board", () => {});
-  it.todo("prevents ships from overlapping", () => {});
-  it.todo("tracks missed attacks", () => {});
-  it.todo("tracks hit attacks", () => {});
+  
+  it("places ships at coordinates", () => {});
+  it("prevents ships from going off board", () => {});
+  it("prevents ships from overlapping", () => {});
+  it("tracks missed attacks", () => {});
+  it("tracks hit attacks", () => {});
 });
