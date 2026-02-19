@@ -70,4 +70,14 @@ describe("Gameboard", () => {
 
     expect(ship.isSunk()).toBe(true);
   });
+  it("does not register the same attack twice", ()=> {
+    const ship = new Ship(2);
+    gameboard.placeShip(ship, 0, 0);
+
+    gameboard.receiveAttack(0, 0);
+    gameboard.receiveAttack(0, 0);
+    expect(ship.hits).toBe(1);
+    expect(gameboard.board[0][0].isHit).toBe(true);
+    expect(gameboard.missedAttacks).not.toContainEqual([0, 0]);
+  })
 });
