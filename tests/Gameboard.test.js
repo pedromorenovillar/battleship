@@ -1,9 +1,6 @@
 import Gameboard from "../src/Gameboard.js";
 import Ship from "../src/Ship.js";
 
-// Represent a 10x10 grid.
-// Place ships at specified coordinates (horizontal or vertical).
-// Prevent ships from overlapping or going off the board.
 // Track missed and hit attacks.
 
 describe("Gameboard", () => {
