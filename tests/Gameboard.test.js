@@ -31,13 +31,18 @@ describe("Gameboard", () => {
   });
   it("prevents ships from going off board horizontally", () => {
     const ship = new Ship(2);
-    expect(()=> {
+    expect(() => {
       gameboard.placeShip(ship, 0, 9);
-
-    }
-    ).toThrow()
+    }).toThrow();
   });
-  it("prevents ships from overlapping", () => {});
+  it("prevents ships from overlapping", () => {
+    const ship1 = new Ship(2);
+    gameboard.placeShip(ship1, 0, 0);
+    const ship2 = new Ship(2)
+    expect(() => {
+      gameboard.placeShip(ship2, 0, 0);
+    }).toThrow();
+  });
   it("tracks missed attacks", () => {});
   it("tracks hit attacks", () => {});
 });
