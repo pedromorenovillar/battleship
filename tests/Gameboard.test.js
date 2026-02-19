@@ -1,4 +1,5 @@
 import Gameboard from "../src/Gameboard.js";
+import Ship from "../src/Ship.js";
 
 // Represent a 10x10 grid.
 // Place ships at specified coordinates (horizontal or vertical).
@@ -20,7 +21,12 @@ describe("Gameboard", () => {
   it("initializes all cells as empty", () => {
   expect(gameboard.board[0][0]).toBe(null);
 });
-  it("places ships at coordinates", () => {});
+  it("places ships at coordinates", () => {
+    const ship = new Ship(2)
+    gameboard.placeShip(ship, 0, 0)
+
+    expect(gameboard.board[0][0]).toBe(ship)
+  });
   it("prevents ships from going off board", () => {});
   it("prevents ships from overlapping", () => {});
   it("tracks missed attacks", () => {});
