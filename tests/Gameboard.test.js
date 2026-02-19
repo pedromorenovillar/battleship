@@ -12,6 +12,7 @@ describe("Gameboard", () => {
   beforeEach(() => {
     gameboard = new Gameboard();
   });
+
   it("represents a 10x10 grid", () => {
     expect(gameboard.board.length).toBe(10);
     gameboard.board.forEach((row) => {
@@ -28,7 +29,14 @@ describe("Gameboard", () => {
     expect(gameboard.board[0][0]).toBe(ship);
     expect(gameboard.board[0][1]).toBe(ship);
   });
-  it("prevents ships from going off board", () => {});
+  it("prevents ships from going off board horizontally", () => {
+    const ship = new Ship(2);
+    expect(()=> {
+      gameboard.placeShip(ship, 0, 9);
+
+    }
+    ).toThrow()
+  });
   it("prevents ships from overlapping", () => {});
   it("tracks missed attacks", () => {});
   it("tracks hit attacks", () => {});
