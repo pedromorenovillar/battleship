@@ -6,5 +6,8 @@ class Gameboard {
       this.board.push(row);
     }
   }
+  placeShip(ship, x, y) {
+    this.board[x][y] = ship;
+  }
 }
 export default Gameboard;
