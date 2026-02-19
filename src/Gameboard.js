@@ -2,7 +2,8 @@ import Ship from "./Ship";
 
 class Gameboard {
   constructor() {
-    this.missedAttacks = []
+    this.ships = [];
+    this.missedAttacks = [];
     this.board = [];
     for (let i = 0; i < 10; i++) {
       let row = new Array(10).fill(null);
@@ -14,6 +15,10 @@ class Gameboard {
     const dx = direction === "vertical" ? 1 : 0;
     const dy = direction === "horizontal" ? 1 : 0;
 
+    // Duplicate check
+    if (this.ships.includes(ship)) {
+      throw Error("Ship already placed.");
+    }
     // Bounds check
     if (x + dx * (ship.length - 1) >= 10 || y + dy * (ship.length - 1) >= 10) {
       throw Error("Cannot place ship outside board.");
@@ -32,17 +37,18 @@ class Gameboard {
       const col = y + dy * i;
       this.board[row][col] = ship;
     }
+    this.ships.push(ship);
   }
   receiveAttack(x, y) {
-    const cell = this.board[x][y]
+    const cell = this.board[x][y];
     if (cell && cell.isHit) {
-      return
+      return;
     }
-    if(cell instanceof Ship) {
-      cell.hit()
+    if (cell instanceof Ship) {
+      cell.hit();
       this.board[x][y] = { ship: cell, isHit: true };
     } else {
-      this.missedAttacks.push([x, y])
+      this.missedAttacks.push([x, y]);
     }
   }
 }
