@@ -88,4 +88,7 @@ describe("Gameboard", () => {
     expect(gameboard.board[0][0].isHit).toBe(true);
     expect(gameboard.missedAttacks).not.toContainEqual([0, 0]);
   })
+  it("returns false if no ships are placed", ()=> {
+    expect(gameboard.areAllShipsSunk()).toBe(false)
+  })
 });
