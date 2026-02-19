@@ -40,6 +40,14 @@ describe("Gameboard", () => {
       gameboard.placeShip(ship2, 0, 0);
     }).toThrow();
   });
+  it("does not allow the same ship to be placed twice", () => {
+  const ship = new Ship(2);
+  gameboard.placeShip(ship, 0, 0);
+
+  expect(() => {
+    gameboard.placeShip(ship, 2, 0);
+  }).toThrow();
+});
   it("places ships vertically at coordinates", () => {
     const ship = new Ship(2);
     gameboard.placeShip(ship, 0, 0, "vertical");
