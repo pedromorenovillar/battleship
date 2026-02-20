@@ -19,7 +19,8 @@ class Game {
       this.currentPlayer = this.players[0]
     }
   }
-  attackCurrentPlayer(opponent, x, y){
+  attackCurrentPlayer(x, y){
+    const opponent = this.currentPlayer === 
     if (this.isGameOver) return
 
     this.currentPlayer.attack(opponent, x, y)

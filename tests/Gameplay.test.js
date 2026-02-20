@@ -19,7 +19,7 @@ describe("Gameplay", () => {
     const game = new Game();
     const opponent = game.players[1];
 
-    game.attackCurrentPlayer(0, 0);
+    game.attack(0, 0);
 
     expect(opponent.gameboard.missedAttacks).toContainEqual([0, 0]);
   });
@@ -29,8 +29,8 @@ describe("Gameplay", () => {
 
     const opponent = game.players[1];
     opponent.gameboard.placeShip(ship, 0, 0)
-    game.attackCurrentPlayer(0, 0);
-    game.attackCurrentPlayer(0, 1);
+    game.attack(0, 0);
+    game.attack(0, 1);
     expect(game.isGameOver).toBe(true);
   });
 });
