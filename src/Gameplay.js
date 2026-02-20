@@ -17,6 +17,11 @@ class Game {
       this.currentPlayer = this.players[0]
     }
   }
+  attackCurrentPlayer(opponent, x, y){
+    this.currentPlayer.attack(opponent, x, y)
+    // TODO: Handling game over if allShipsSunk?
+    this.nextTurn()
+  }
 }
 
 export default Game;
