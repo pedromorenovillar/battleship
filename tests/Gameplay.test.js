@@ -19,18 +19,18 @@ describe("Gameplay", () => {
     const game = new Game();
     const opponent = game.players[1];
 
-    game.attackCurrentPlayer(opponent, 0, 0);
+    game.attackCurrentPlayer(0, 0);
 
     expect(opponent.gameboard.missedAttacks).toContainEqual([0, 0]);
   });
   it("detects game over when all opponent ships are sunk", () => {
     const game = new Game();
     const ship = new Ship(2)
-    
+
     const opponent = game.players[1];
     opponent.gameboard.placeShip(ship, 0, 0)
-    game.attackCurrentPlayer(opponent, 0, 0);
-    game.attackCurrentPlayer(opponent, 0, 1);
+    game.attackCurrentPlayer(0, 0);
+    game.attackCurrentPlayer(0, 1);
     expect(game.isGameOver).toBe(true);
   });
 });
