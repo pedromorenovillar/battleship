@@ -10,6 +10,13 @@ class Game {
     this.players.push(player1, player2)
     this.currentPlayer = player1
   }
+  nextTurn() {
+    if (this.currentPlayer===this.players[0]) {
+      this.currentPlayer = this.players[1]
+    } else {
+      this.currentPlayer = this.players[0]
+    }
+  }
 }
 
 export default Game;
