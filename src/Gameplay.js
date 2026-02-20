@@ -2,6 +2,8 @@ import Player from "./Player";
 
 class Game {
   constructor() {
+    this.isGameOver = false;
+    this.winner
     this.players = []
 
     const player1 = new Player()
@@ -18,8 +20,15 @@ class Game {
     }
   }
   attackCurrentPlayer(opponent, x, y){
+    if (this.isGameOver) return
+
     this.currentPlayer.attack(opponent, x, y)
-    // TODO: Handling game over if allShipsSunk?
+    
+    if(opponent.gameboard.areAllShipsSunk()){
+      this.winner = this.currentPlayer
+      this.isGameOver = true
+      return;
+    }
     this.nextTurn()
   }
 }

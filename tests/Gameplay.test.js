@@ -1,4 +1,5 @@
 import Game from "../src/Gameplay";
+import Ship from "../src/Ship";
 
 describe("Gameplay", () => {
   it("starts game with two players", () => {
@@ -24,8 +25,10 @@ describe("Gameplay", () => {
   });
   it("detects game over when all opponent ships are sunk", () => {
     const game = new Game();
+    const ship = new Ship(2)
+    
     const opponent = game.players[1];
-    opponent.gameboard.placeShip(2, 0, 0)
+    opponent.gameboard.placeShip(ship, 0, 0)
     game.attackCurrentPlayer(opponent, 0, 0);
     game.attackCurrentPlayer(opponent, 0, 1);
     expect(game.isGameOver).toBe(true);
