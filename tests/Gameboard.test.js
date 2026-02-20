@@ -17,7 +17,8 @@ describe("Gameboard", () => {
     });
   });
   it("initializes all cells as empty", () => {
-    expect(gameboard.board[0][0]).toBe(null);
+    expect(gameboard.board[0][0].ship).toBe(null);
+    expect(gameboard.board[0][0].isHit).toBe(false);
   });
   it("places ships horizontally at coordinates", () => {
     const ship = new Ship(2);
