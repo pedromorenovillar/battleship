@@ -16,10 +16,18 @@ describe("Gameplay", () => {
   });
   it("current player can attack opponent", () => {
     const game = new Game();
-    const opponent = game.players[1]
+    const opponent = game.players[1];
 
-    game.attackCurrentPlayer(opponent, 0, 0)
+    game.attackCurrentPlayer(opponent, 0, 0);
 
-    expect(opponent.gameboard.missedAttacks).toContainEqual([0,0]);
+    expect(opponent.gameboard.missedAttacks).toContainEqual([0, 0]);
+  });
+  it("detects game over when all opponent ships are sunk", () => {
+    const game = new Game();
+    const opponent = game.players[1];
+    opponent.gameboard.placeShip(2, 0, 0)
+    game.attackCurrentPlayer(opponent, 0, 0);
+    game.attackCurrentPlayer(opponent, 0, 1);
+    expect(game.isGameOver).toBe(true);
   });
 });
