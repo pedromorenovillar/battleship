@@ -6,7 +6,11 @@ class Gameboard {
     this.missedAttacks = [];
     this.board = [];
     for (let i = 0; i < 10; i++) {
-      let row = new Array(10).fill(null);
+      let row = []
+      for (let i = 0; i < 10; i++) {
+        let cell = {ship: null, isHit: false}
+        row.push(cell)
+      }
       this.board.push(row);
     }
   }
