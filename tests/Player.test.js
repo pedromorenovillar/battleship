@@ -17,7 +17,7 @@ describe("Player", () => {
     expect(player2.gameboard.missedAttacks).toContainEqual([0, 0]);
   });
   it("can be marked as CPU player", () => {
-    const CPUplayer = new Player("CPU");
+    const CPUplayer = new Player(true);
 
     expect(CPUplayer.isCPU).toBe(true);
   });
