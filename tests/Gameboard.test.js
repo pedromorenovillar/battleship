@@ -24,8 +24,8 @@ describe("Gameboard", () => {
     const ship = new Ship(2);
     gameboard.placeShip(ship, 0, 0);
 
-    expect(gameboard.board[0][0]).toBe(ship);
-    expect(gameboard.board[0][1]).toBe(ship);
+    expect(gameboard.board[0][0].ship).toBe(ship);
+    expect(gameboard.board[0][1].ship).toBe(ship);
   });
   it("prevents ships from going off board horizontally", () => {
     const ship = new Ship(2);
@@ -53,8 +53,8 @@ describe("Gameboard", () => {
     const ship = new Ship(2);
     gameboard.placeShip(ship, 0, 0, "vertical");
 
-    expect(gameboard.board[0][0]).toBe(ship);
-    expect(gameboard.board[1][0]).toBe(ship);
+    expect(gameboard.board[0][0].ship).toBe(ship);
+    expect(gameboard.board[1][0].ship).toBe(ship);
   });
   it("tracks missed attacks", () => {
     gameboard.receiveAttack(1, 1);
