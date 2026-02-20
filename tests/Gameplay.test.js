@@ -9,4 +9,10 @@ describe('Gameplay', ()=> {
     expect(game.players.length).toBe(2)
     expect(game.currentPlayer).toBe(game.players[0])
   })
+  it('switching turns changes player', ()=> {
+    const game = new Game()
+    game.nextTurn()
+
+    expect(game.currentPlayer).toBe(game.players[1])
+  })
 })
