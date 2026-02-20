@@ -45,15 +45,17 @@ class Gameboard {
   }
   receiveAttack(x, y) {
     const cell = this.board[x][y];
-    if (cell && cell.isHit) {
-      return;
-    }
-    if (cell instanceof Ship) {
-      cell.hit();
-      this.board[x][y] = { ship: cell, isHit: true };
+
+    if (cell.isHit) return
+    
+    cell.isHit = true;
+    
+    if (cell.ship !== null) {
+      cell.ship.hit()
     } else {
       this.missedAttacks.push([x, y]);
     }
+      
   }
   areAllShipsSunk() {
     if(this.ships.length===0) {
