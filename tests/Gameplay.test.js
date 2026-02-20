@@ -30,6 +30,7 @@ describe("Gameplay", () => {
     const opponent = game.players[1];
     opponent.gameboard.placeShip(ship, 0, 0)
     game.attack(0, 0);
+    game.attack(5, 0);
     game.attack(0, 1);
     expect(game.isGameOver).toBe(true);
   });
