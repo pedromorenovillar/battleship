@@ -31,7 +31,7 @@ class Gameboard {
     for (let i = 0; i < ship.length; i++) {
       const row = x + dx * i;
       const col = y + dy * i;
-      if (this.board[row][col] !== null) {
+      if (this.board[row][col].ship !== null) {
         throw Error("Cannot place ship where there is already one.");
       }
     }
@@ -39,7 +39,7 @@ class Gameboard {
     for (let i = 0; i < ship.length; i++) {
       const row = x + dx * i;
       const col = y + dy * i;
-      this.board[row][col] = ship;
+      this.board[row][col].ship = ship;
     }
     this.ships.push(ship);
   }
