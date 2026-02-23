@@ -42,13 +42,13 @@ describe("Gameboard", () => {
     }).toThrow();
   });
   it("does not allow the same ship to be placed twice", () => {
-  const ship = new Ship(2);
-  gameboard.placeShip(ship, 0, 0);
+    const ship = new Ship(2);
+    gameboard.placeShip(ship, 0, 0);
 
-  expect(() => {
-    gameboard.placeShip(ship, 2, 0);
-  }).toThrow();
-});
+    expect(() => {
+      gameboard.placeShip(ship, 2, 0);
+    }).toThrow();
+  });
   it("places ships vertically at coordinates", () => {
     const ship = new Ship(2);
     gameboard.placeShip(ship, 0, 0, "vertical");
@@ -79,7 +79,7 @@ describe("Gameboard", () => {
 
     expect(ship.isSunk()).toBe(true);
   });
-  it("does not register the same attack twice", ()=> {
+  it("does not register the same attack twice", () => {
     const ship = new Ship(2);
     gameboard.placeShip(ship, 0, 0);
 
@@ -88,8 +88,13 @@ describe("Gameboard", () => {
     expect(ship.hits).toBe(1);
     expect(gameboard.board[0][0].isHit).toBe(true);
     expect(gameboard.missedAttacks).not.toContainEqual([0, 0]);
-  })
-  it("returns false if no ships are placed", ()=> {
-    expect(gameboard.areAllShipsSunk()).toBe(false)
-  })
+  });
+  it("returns false if no ships are placed", () => {
+    expect(gameboard.areAllShipsSunk()).toBe(false);
+  });
+  it("prevents off board attack", () => {
+    expect(() => {
+      gameboard.receiveAttack(15, 5);
+    }).toThrow();
+  });
 });
