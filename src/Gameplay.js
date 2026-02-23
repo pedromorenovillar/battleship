@@ -27,6 +27,7 @@ class Game {
       this.currentPlayer === this.players[0]
         ? this.players[1]
         : this.players[0];
+    // Generates CPU move if coordinates not provided
     if (x === undefined || y === undefined) {
       if (!this.currentPlayer.isCPU) {
         throw new Error("Human player must provide coordinates.");
