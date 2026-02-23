@@ -27,7 +27,13 @@ class Game {
       this.currentPlayer === this.players[0]
         ? this.players[1]
         : this.players[0];
-
+    if (x === undefined || y === undefined) {
+      if (!this.currentPlayer.isCPU) {
+        throw new Error("Human player must provide coordinates.");
+      }
+      x = Math.floor(Math.random() * 10);
+      y = Math.floor(Math.random() * 10);
+    }
     this.currentPlayer.attack(opponent, x, y);
 
     if (opponent.gameboard.areAllShipsSunk()) {
@@ -49,7 +55,6 @@ class Game {
       this.players[1].gameboard.ships.length > 0
     ) {
       this.isGameStarted = true;
-      console.log(this.isGameStarted)
     } else {
       throw new Error("Each player needs to place at least one ship.");
     }
