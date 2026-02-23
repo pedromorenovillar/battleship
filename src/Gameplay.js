@@ -22,12 +22,11 @@ class Game {
   }
   attack(x, y) {
     if (this.isGameOver) return;
-    
+
     const opponent =
       this.currentPlayer === this.players[0]
         ? this.players[1]
         : this.players[0];
-
 
     this.currentPlayer.attack(opponent, x, y);
 
@@ -40,12 +39,20 @@ class Game {
   }
   placeShip(player, ship, x, y) {
     if (this.isGameStarted === true) {
-      throw new Error('You cannot place a ship after the game has started.');
+      throw new Error("You cannot place a ship after the game has started.");
     }
-    player.gameboard.placeShip(ship, x, y)
+    player.gameboard.placeShip(ship, x, y);
   }
   startGame() {
-    this.isGameStarted = true;
+    if (
+      this.players[0].gameboard.ships.length > 0 &&
+      this.players[1].gameboard.ships.length > 0
+    ) {
+      this.isGameStarted = true;
+      console.log(this.isGameStarted)
+    } else {
+      throw new Error("Each player needs to place at least one ship.");
+    }
   }
 }
 

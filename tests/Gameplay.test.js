@@ -54,9 +54,9 @@ describe("Gameplay", () => {
     }).toThrow();
   });
 
-    it("requires both players to place at least one ship before starting", () => {
+  it("requires both players to place at least one ship before starting", () => {
     const game = new Game();
-  
+
     expect(() => {
       game.startGame();
     }).toThrow();
