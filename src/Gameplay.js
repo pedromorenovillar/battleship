@@ -2,6 +2,7 @@ import Player from "./Player";
 
 class Game {
   constructor() {
+    this.isGameStarted = false;
     this.isGameOver = false;
     this.winner;
     this.players = [];
@@ -36,6 +37,15 @@ class Game {
       return;
     }
     this.nextTurn();
+  }
+  placeShip(player, ship, x, y) {
+    if (this.isGameStarted === true) {
+      throw new Error('You cannot place a ship after the game has started.');
+    }
+    player.gameboard.placeShip(ship, x, y)
+  }
+  startGame() {
+    this.isGameStarted = true;
   }
 }
 
