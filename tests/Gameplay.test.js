@@ -61,4 +61,25 @@ describe("Gameplay", () => {
       game.startGame();
     }).toThrow();
   });
+  it("CPU player makes a valid attack", () => {
+    const game = new Game();
+    const humanPlayer = game.players[0];
+    const opponent = game.players[1];
+    const ship1 = new Ship(2);
+    const ship2 = new Ship(2);
+    const ship3 = new Ship(2);
+    const ship4 = new Ship(2);
+    game.placeShip(humanPlayer, ship1, 0, 0);
+    game.placeShip(humanPlayer, ship2, 3, 0);
+    game.placeShip(opponent, ship3, 0, 0);
+    game.placeShip(opponent, ship4, 3, 0);
+    game.startGame();
+    game.attack(0, 0);
+    game.attack();
+    
+    const wasAnyCellHit = humanPlayer.gameboard.board.some((row) =>
+      row.some((cell) => cell.isHit),
+    );
+    expect(wasAnyCellHit).toBe(true);
+  });
 });
