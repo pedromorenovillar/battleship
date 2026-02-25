@@ -5,47 +5,85 @@ import Game from "../src/Gameplay.js";
 const game = new Game();
 
 // Render boards
-const playerBoardContainer = document.getElementById('player-board')
-const CPUBoardContainer = document.getElementById('cpu-board')
+const playerBoardContainer = document.getElementById("player-board");
+const CPUBoardContainer = document.getElementById("cpu-board");
 
-createBoard(playerBoardContainer)
-createBoard(CPUBoardContainer)
+createBoard(playerBoardContainer);
+createBoard(CPUBoardContainer);
+renderBoards();
 
 // Attach click listeners
+CPUBoardContainer.addEventListener("click", handleClick);
 
 // Update DOM after every move
 
+// Helper functions
 function createBoard(container) {
   container.innerHTML = "";
 
-  for (let row = 0; row < 10; row ++) {
+  for (let row = 0; row < 10; row++) {
     for (let col = 0; col < 10; col++) {
-      const cell = document.createElement("div")
+      const cell = document.createElement("div");
       cell.dataset.row = row;
       cell.dataset.col = col;
-      cell.classList.add("cell")
+      cell.classList.add("cell");
 
-      container.appendChild(cell)
+      container.appendChild(cell);
     }
   }
 }
 
-function updateBoard(container, gameboard, showShips=false) {
+function updateBoard(container, gameboard, showShips = false) {
   const cells = container.querySelectorAll(".cell");
 
-  cells.forEach(cell => {
-    const row = Number(cell.dataset.row)
-    const col = Number(cell.dataset.col)
+  cells.forEach((cell) => {
+    const row = Number(cell.dataset.row);
+    const col = Number(cell.dataset.col);
 
-    const boardCell = gameboard.board[row][col]
-    cell.classList.remove("hit", "miss", "ship")
+    const boardCell = gameboard.board[row][col];
+    cell.classList.remove("hit", "miss", "ship");
 
     if (boardCell.isHit && boardCell.ship) {
-      cell.classList.add("hit")    
+      cell.classList.add("hit");
     } else if (boardCell.isHit && !boardCell.ship) {
-      cell.classList.add("miss")
+      cell.classList.add("miss");
     } else if (showShips && boardCell.ship) {
-      cell.classList.add("ship")
+      cell.classList.add("ship");
     }
   });
+}
+
+function handleClick(e) {
+  const cell = e.target;
+
+  // Ignore click if not .cell class
+  if (!cell.classList.contains("cell")) return;
+  // Ignore click on game over
+  if (game.isGameOver) return;
+  // Ignore click on CPU's turn
+  if (game.currentPlayer.isCPU) return;
+
+  const row = Number(cell.dataset.row);
+  const col = Number(cell.dataset.col);
+
+  game.attack(row, col);
+  if (game.currentPlayer.isCPU && !game.isGameOver) {
+    setTimeout(() => {
+      game.attack();
+      renderBoards();
+    }, 500);
+  }
+  renderBoards();
+}
+
+function renderBoards() {
+  updateBoard(playerBoardContainer, game.players[0].gameboard, true);
+  updateBoard(CPUBoardContainer, game.players[1].gameboard, false);
+  toggleBoardInteraction()
+}
+
+function toggleBoardInteraction() {
+  CPUBoardContainer.style.pointerEvents = game.currentPlayer.isCPU
+    ? "none"
+    : "auto";
 }
