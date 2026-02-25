@@ -1,3 +1,4 @@
+import Gameboard from "../src/Gameboard.js";
 import Game from "../src/Gameplay.js";
 
 // Create a new Game
@@ -27,4 +28,24 @@ function createBoard(container) {
       container.appendChild(cell)
     }
   }
+}
+
+function updateBoard(container, gameboard, showShips=false) {
+  const cells = container.querySelectorAll(".cell");
+
+  cells.forEach(cell => {
+    const row = Number(cell.dataset.row)
+    const col = Number(cell.dataset.col)
+
+    const boardCell = gameboard.board[row][col]
+    cell.classList.remove("hit", "miss", "ship")
+
+    if (boardCell.isHit && boardCell.ship) {
+      cell.classList.add("hit")    
+    } else if (boardCell.isHit && !boardCell.ship) {
+      cell.classList.add("miss")
+    } else if (showShips && boardCell.ship) {
+      cell.classList.add("ship")
+    }
+  });
 }
