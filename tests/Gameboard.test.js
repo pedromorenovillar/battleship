@@ -97,4 +97,29 @@ describe("Gameboard", () => {
       gameboard.receiveAttack(15, 5);
     }).toThrow();
   });
+  it('returns `already` if cell was previously attacked', ()=> {
+    const board = new Gameboard;
+    board.receiveAttack(0, 0)
+    const result = board.receiveAttack(0, 0)
+
+    expect(result).toBe("already")
+  })
+  it('returns `hit` when ship is hit', ()=> {
+  const board = new Gameboard();
+  const ship = new Ship(1);
+  board.placeShip(ship, 0, 0);
+
+  const result = board.receiveAttack(0, 0);
+
+  expect(result).toBe("hit");
+  })
+  it('returns `miss` when ship is missed', ()=> {
+  const board = new Gameboard();
+  const ship = new Ship(1);
+  board.placeShip(ship, 1, 1);
+
+  const result = board.receiveAttack(0, 0);
+
+  expect(result).toBe("miss");
+  })
 });
