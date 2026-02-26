@@ -35,4 +35,14 @@ describe("CPU", () => {
 
     expect(uniqueMoves.size).toBe(moves.length);
   });
+  it('queues adjacent cells after a hit', () => {
+    const cpu = new Player(true)
+
+    cpu.processHit(4, 4)
+
+    expect(cpu.targetQueue).toContainEqual([3, 4])
+    expect(cpu.targetQueue).toContainEqual([5, 4])
+    expect(cpu.targetQueue).toContainEqual([4, 3])
+    expect(cpu.targetQueue).toContainEqual([4, 5])
+  })
 });
