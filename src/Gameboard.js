@@ -47,14 +47,16 @@ class Gameboard {
     }
     const cell = this.board[x][y];
 
-    if (cell.isHit) return;
+    if (cell.isHit) return "already";
 
     cell.isHit = true;
 
     if (cell.ship !== null) {
       cell.ship.hit();
+      return "hit"
     } else {
       this.missedAttacks.push([x, y]);
+      return "miss"
     }
   }
   areAllShipsSunk() {
