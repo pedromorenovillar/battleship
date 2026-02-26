@@ -21,28 +21,33 @@ class Game {
     }
   }
   attack(x, y) {
-    if (this.isGameOver) return;
+  if (this.isGameOver) return;
 
-    const opponent =
-      this.currentPlayer === this.players[0]
-        ? this.players[1]
-        : this.players[0];
-    // Generates CPU move if coordinates not provided
-    if (x === undefined || y === undefined) {
-      if (!this.currentPlayer.isCPU) {
-        throw new Error("Human player must provide coordinates.");
-      }
-      [x, y] = this.currentPlayer.getRandomMove();
-      this.currentPlayer.attack(opponent, x, y);
+  const opponent =
+    this.currentPlayer === this.players[0]
+      ? this.players[1]
+      : this.players[0];
 
-      if (opponent.gameboard.areAllShipsSunk()) {
-        this.winner = this.currentPlayer;
-        this.isGameOver = true;
-        return;
-      }
-      this.nextTurn();
+  if (x === undefined || y === undefined) {
+    if (!this.currentPlayer.isCPU) {
+      throw new Error("Human player must provide coordinates.");
     }
+    [x, y] = this.currentPlayer.getRandomMove();
   }
+
+  const result = this.currentPlayer.attack(opponent, x, y);
+
+  if (opponent.gameboard.areAllShipsSunk()) {
+    this.winner = this.currentPlayer;
+    this.isGameOver = true;
+    return;
+  }
+
+  // If miss, switch turn; if hit, same player goes again
+  if (result === "miss") {
+    this.nextTurn();
+  }
+}
   placeShip(player, ship, x, y) {
     if (this.isGameStarted === true) {
       throw new Error("You cannot place a ship after the game has started.");
