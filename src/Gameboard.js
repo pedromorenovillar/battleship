@@ -1,15 +1,13 @@
-import Ship from "./Ship";
-
 class Gameboard {
   constructor() {
     this.ships = [];
     this.missedAttacks = [];
     this.board = [];
     for (let i = 0; i < 10; i++) {
-      let row = []
+      let row = [];
       for (let j = 0; j < 10; j++) {
-        let cell = {ship: null, isHit: false}
-        row.push(cell)
+        let cell = { ship: null, isHit: false };
+        row.push(cell);
       }
       this.board.push(row);
     }
@@ -44,24 +42,26 @@ class Gameboard {
     this.ships.push(ship);
   }
   receiveAttack(x, y) {
+    if (x < 0 || x >= 10 || y < 0 || y >= 10) {
+      throw new Error("Coordinates are outside the board.");
+    }
     const cell = this.board[x][y];
 
-    if (cell.isHit) return
-    
+    if (cell.isHit) return;
+
     cell.isHit = true;
-    
+
     if (cell.ship !== null) {
-      cell.ship.hit()
+      cell.ship.hit();
     } else {
       this.missedAttacks.push([x, y]);
     }
-      
   }
   areAllShipsSunk() {
-    if(this.ships.length===0) {
-      return false
+    if (this.ships.length === 0) {
+      return false;
     }
-    return this.ships.every(ship=>ship.isSunk())
+    return this.ships.every((ship) => ship.isSunk());
   }
 }
 export default Gameboard;
