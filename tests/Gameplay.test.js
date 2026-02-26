@@ -30,7 +30,6 @@ describe("Gameplay", () => {
     const opponent = game.players[1];
     opponent.gameboard.placeShip(ship, 0, 0);
     game.attack(0, 0);
-    game.attack(5, 0);
     game.attack(0, 1);
     expect(game.isGameOver).toBe(true);
   });
@@ -74,7 +73,7 @@ describe("Gameplay", () => {
     game.placeShip(opponent, ship3, 0, 0);
     game.placeShip(opponent, ship4, 3, 0);
     game.startGame();
-    game.attack(0, 0);
+    game.attack(9, 9);
     game.attack();
     
     const wasAnyCellHit = humanPlayer.gameboard.board.some((row) =>
