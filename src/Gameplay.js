@@ -21,33 +21,46 @@ class Game {
     }
   }
   attack(x, y) {
-  if (this.isGameOver) return;
+    if (this.isGameOver) return;
 
-  const opponent =
-    this.currentPlayer === this.players[0]
-      ? this.players[1]
-      : this.players[0];
+    const opponent =
+      this.currentPlayer === this.players[0]
+        ? this.players[1]
+        : this.players[0];
 
-  if (x === undefined || y === undefined) {
-    if (!this.currentPlayer.isCPU) {
-      throw new Error("Human player must provide coordinates.");
+    // Determine coordinates for CPU or human
+    if (x === undefined || y === undefined) {
+      if (!this.currentPlayer.isCPU) {
+        throw new Error("Human player must provide coordinates.");
+      }
+      // CPU keeps attacking until it misses
+      let result;
+      do {
+        [x, y] = this.currentPlayer.getNextMove();
+        result = this.currentPlayer.attack(opponent, x, y);
+        if (opponent.gameboard.areAllShipsSunk()) {
+          this.winner = this.currentPlayer;
+          this.isGameOver = true;
+          return;
+        }
+      } while (result === "hit");
+      this.nextTurn(); // switch turn after miss
+      return;
     }
-    [x, y] = this.currentPlayer.getRandomMove();
-  }
 
-  const result = this.currentPlayer.attack(opponent, x, y);
+    // Human attack
+    const result = this.currentPlayer.attack(opponent, x, y);
 
-  if (opponent.gameboard.areAllShipsSunk()) {
-    this.winner = this.currentPlayer;
-    this.isGameOver = true;
-    return;
-  }
+    if (opponent.gameboard.areAllShipsSunk()) {
+      this.winner = this.currentPlayer;
+      this.isGameOver = true;
+      return;
+    }
 
-  // If miss, switch turn; if hit, same player goes again
-  if (result === "miss") {
-    this.nextTurn();
+    if (result === "miss") {
+      this.nextTurn();
+    }
   }
-}
   placeShip(player, ship, x, y) {
     if (this.isGameStarted === true) {
       throw new Error("You cannot place a ship after the game has started.");
