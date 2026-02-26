@@ -22,3 +22,14 @@ describe("Player", () => {
     expect(CPUplayer.isCPU).toBe(true);
   });
 });
+
+describe("CPU", () => {
+  it("does not generate the same move twice", () => {
+    const cpu = new Player(true);
+
+    const move1 = cpu.getRandomMove();
+    const move2 = cpu.getRandomMove();
+
+    expect(move1).not.toEqual(move2);
+  });
+});
