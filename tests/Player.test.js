@@ -24,12 +24,15 @@ describe("Player", () => {
 });
 
 describe("CPU", () => {
-  it("does not generate the same move twice", () => {
+  it("never repeats a move", () => {
     const cpu = new Player(true);
+    const moves = [];
 
-    const move1 = cpu.getRandomMove();
-    const move2 = cpu.getRandomMove();
+    for (let i = 0; i < 100; i++) {
+      moves.push(cpu.getRandomMove());
+    }
+    const uniqueMoves = new Set(moves.map((m) => m.toString()));
 
-    expect(move1).not.toEqual(move2);
+    expect(uniqueMoves.size).toBe(moves.length);
   });
 });
