@@ -35,6 +35,7 @@ describe("CPU", () => {
 
     expect(uniqueMoves.size).toBe(moves.length);
   });
+  
   it('queues adjacent cells after a hit', () => {
     const cpu = new Player(true)
 
