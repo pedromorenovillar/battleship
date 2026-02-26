@@ -32,17 +32,16 @@ class Game {
       if (!this.currentPlayer.isCPU) {
         throw new Error("Human player must provide coordinates.");
       }
-      x = Math.floor(Math.random() * 10);
-      y = Math.floor(Math.random() * 10);
-    }
-    this.currentPlayer.attack(opponent, x, y);
+      [x, y] = this.currentPlayer.getRandomMove();
+      this.currentPlayer.attack(opponent, x, y);
 
-    if (opponent.gameboard.areAllShipsSunk()) {
-      this.winner = this.currentPlayer;
-      this.isGameOver = true;
-      return;
+      if (opponent.gameboard.areAllShipsSunk()) {
+        this.winner = this.currentPlayer;
+        this.isGameOver = true;
+        return;
+      }
+      this.nextTurn();
     }
-    this.nextTurn();
   }
   placeShip(player, ship, x, y) {
     if (this.isGameStarted === true) {
@@ -50,6 +49,7 @@ class Game {
     }
     player.gameboard.placeShip(ship, x, y);
   }
+
   startGame() {
     if (
       this.players[0].gameboard.ships.length > 0 &&
