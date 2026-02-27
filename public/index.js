@@ -94,7 +94,10 @@ function toggleBoardInteraction() {
 }
 
 function placeShips(e) {
+
   if (game.isGameStarted || game.isGameOver) return;
+  if (!e.target.classList.contains("cell")) return;
+  if (currentShipIndex === fleet.length) return
 
   try {
     const cell = e.target;
@@ -104,9 +107,9 @@ function placeShips(e) {
 
     const ship = new Ship(fleet[currentShipIndex]);
     game.placeShip(game.players[0], ship, row, col);
+    currentShipIndex++;
+    renderBoards();
   } catch (error) {
     console.error(error);
   }
-  currentShipIndex++;
-  renderBoards();
 }

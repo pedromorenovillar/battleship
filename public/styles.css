@@ -33,3 +33,7 @@ h2,
 #cpu-board .cell {
   background-color: aquamarine;
 }
+
+.ship {
+  background-color: red;
+}
