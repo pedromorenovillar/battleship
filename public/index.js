@@ -1,8 +1,12 @@
 import Gameboard from "../src/Gameboard.js";
 import Game from "../src/Gameplay.js";
+import Ship from "../src/Ship.js";
 
 // Create a new Game
 const game = new Game();
+
+const fleet = [5, 4, 3, 3, 2];
+let currentShipIndex = 0;
 
 // Render boards
 const playerBoardContainer = document.getElementById("player-board");
@@ -14,6 +18,7 @@ renderBoards();
 
 // Attach click listeners
 CPUBoardContainer.addEventListener("click", handleClick);
+playerBoardContainer.addEventListener("click", placeShips);
 
 // Update DOM after every move
 
@@ -79,11 +84,29 @@ function handleClick(e) {
 function renderBoards() {
   updateBoard(playerBoardContainer, game.players[0].gameboard, true);
   updateBoard(CPUBoardContainer, game.players[1].gameboard, false);
-  toggleBoardInteraction()
+  toggleBoardInteraction();
 }
 
 function toggleBoardInteraction() {
   CPUBoardContainer.style.pointerEvents = game.currentPlayer.isCPU
     ? "none"
     : "auto";
+}
+
+function placeShips(e) {
+  if (game.isGameStarted || game.isGameOver) return;
+
+  try {
+    const cell = e.target;
+    const row = Number(e.target.dataset.row);
+    const col = Number(e.target.dataset.col);
+    console.log(fleet[currentShipIndex]);
+
+    const ship = new Ship(fleet[currentShipIndex]);
+    game.placeShip(game.players[0], ship, row, col);
+  } catch (error) {
+    console.error(error);
+  }
+  currentShipIndex++;
+  renderBoards();
 }
