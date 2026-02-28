@@ -1,4 +1,6 @@
 import Player from "./Player.js";
+import Ship from "./Ship.js";
+export const fleet = [5, 4, 3, 3, 2];
 
 class Game {
   constructor() {
@@ -61,11 +63,28 @@ class Game {
       this.nextTurn();
     }
   }
-  placeShip(player, ship, x, y, currentDirection="horizontal") {
+  placeShip(player, ship, x, y, currentDirection = "horizontal") {
     if (this.isGameStarted === true) {
       throw new Error("You cannot place a ship after the game has started.");
     }
     player.gameboard.placeShip(ship, x, y, currentDirection);
+  }
+  autoPlaceCPUFleet() {
+    fleet.forEach((fleetShip) => {
+      const ship = new Ship(fleetShip);
+      let placed = false;
+      while (!placed) {
+        try {
+          let x = Math.floor(Math.random() * 10);
+          let y = Math.floor(Math.random() * 10);
+          let currentDirection =
+            Math.random() < 0.5 ? "horizontal" : "vertical";
+          this.placeShip(this.players[1], ship, x, y, currentDirection)
+          placed = true;
+        } catch (error) {
+        }
+      }
+    });
   }
 
   startGame() {

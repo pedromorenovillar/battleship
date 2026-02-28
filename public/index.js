@@ -1,11 +1,11 @@
 import Gameboard from "../src/Gameboard.js";
 import Game from "../src/Gameplay.js";
 import Ship from "../src/Ship.js";
+import { fleet } from "../src/Gameplay.js";
 
 // Create a new Game
 const game = new Game();
 
-const fleet = [5, 4, 3, 3, 2];
 let currentShipIndex = 0;
 let currentDirection = "horizontal";
 
@@ -21,7 +21,7 @@ renderBoards();
 CPUBoardContainer.addEventListener("click", handleClick);
 playerBoardContainer.addEventListener("click", placeShips);
 document.addEventListener("keydown", (event) => {
-  const keyName = event.key
+  const keyName = event.key;
 
   if (keyName === "r") {
     if (currentDirection === "horizontal") {
@@ -59,6 +59,8 @@ function updateBoard(container, gameboard, showShips = false) {
 
     const boardCell = gameboard.board[row][col];
     cell.classList.remove("hit", "miss", "ship");
+    if (boardCell.ship) {
+    }
 
     if (boardCell.isHit && boardCell.ship) {
       cell.classList.add("hit");
@@ -108,15 +110,19 @@ function toggleBoardInteraction() {
 function placeShips(e) {
   if (game.isGameStarted || game.isGameOver) return;
   if (!e.target.classList.contains("cell")) return;
-  if (currentShipIndex === fleet.length) return;
-
   try {
     const row = Number(e.target.dataset.row);
     const col = Number(e.target.dataset.col);
-
+    
     const ship = new Ship(fleet[currentShipIndex]);
     game.placeShip(game.players[0], ship, row, col, currentDirection);
     currentShipIndex++;
+    if (currentShipIndex === fleet.length) {
+      game.autoPlaceCPUFleet();
+      game.startGame();
+      renderBoards();
+      return;
+    }
     renderBoards();
   } catch (error) {
     console.error(error);
