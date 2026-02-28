@@ -7,6 +7,7 @@ const game = new Game();
 
 const fleet = [5, 4, 3, 3, 2];
 let currentShipIndex = 0;
+let currentDirection = "horizontal";
 
 // Render boards
 const playerBoardContainer = document.getElementById("player-board");
@@ -19,6 +20,17 @@ renderBoards();
 // Attach click listeners
 CPUBoardContainer.addEventListener("click", handleClick);
 playerBoardContainer.addEventListener("click", placeShips);
+document.addEventListener("keydown", (event) => {
+  const keyName = event.key
+
+  if (keyName === "r") {
+    if (currentDirection === "horizontal") {
+      currentDirection = "vertical";
+    } else {
+      currentDirection = "horizontal";
+    }
+  }
+});
 
 // Update DOM after every move
 
@@ -94,19 +106,16 @@ function toggleBoardInteraction() {
 }
 
 function placeShips(e) {
-
   if (game.isGameStarted || game.isGameOver) return;
   if (!e.target.classList.contains("cell")) return;
-  if (currentShipIndex === fleet.length) return
+  if (currentShipIndex === fleet.length) return;
 
   try {
-    const cell = e.target;
     const row = Number(e.target.dataset.row);
     const col = Number(e.target.dataset.col);
-    console.log(fleet[currentShipIndex]);
 
     const ship = new Ship(fleet[currentShipIndex]);
-    game.placeShip(game.players[0], ship, row, col);
+    game.placeShip(game.players[0], ship, row, col, currentDirection);
     currentShipIndex++;
     renderBoards();
   } catch (error) {
