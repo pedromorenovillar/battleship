@@ -61,11 +61,11 @@ class Game {
       this.nextTurn();
     }
   }
-  placeShip(player, ship, x, y) {
+  placeShip(player, ship, x, y, currentDirection="horizontal") {
     if (this.isGameStarted === true) {
       throw new Error("You cannot place a ship after the game has started.");
     }
-    player.gameboard.placeShip(ship, x, y);
+    player.gameboard.placeShip(ship, x, y, currentDirection);
   }
 
   startGame() {
