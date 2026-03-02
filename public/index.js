@@ -13,6 +13,15 @@ let currentDirection = "horizontal";
 const playerBoardContainer = document.getElementById("player-board");
 const CPUBoardContainer = document.getElementById("cpu-board");
 
+const infoMsg = document.getElementById('info-msg')
+const infoHeader = document.createElement("h2")
+infoHeader.textContent = `Para empezar, despliega la flota en el tablero del jugador.`
+const directionInfo = document.createElement("h4")
+directionInfo.textContent = `Posición: ${currentDirection}. Pulsa R para rotar el buque o haz clic en el tablero para colocarlo.`
+
+infoMsg.appendChild(infoHeader)
+infoMsg.appendChild(directionInfo)
+
 createBoard(playerBoardContainer);
 createBoard(CPUBoardContainer);
 renderBoards();
@@ -30,6 +39,7 @@ document.addEventListener("keydown", (event) => {
       currentDirection = "horizontal";
     }
   }
+  directionInfo.textContent = `Posición: ${currentDirection}. Pulsa R para rotar el buque o haz clic en el tablero para colocarlo.`
 });
 
 // Update DOM after every move
