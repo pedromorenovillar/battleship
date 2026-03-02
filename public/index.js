@@ -134,6 +134,8 @@ function placeShips(e) {
     currentShipIndex++;
     if (currentShipIndex === fleet.length) {
       game.autoPlaceCPUFleet();
+      infoHeader.textContent = `¡Ahora ataca una casilla del tablero enemigo!`
+      directionInfo.remove()
       game.startGame();
       renderBoards();
       return;

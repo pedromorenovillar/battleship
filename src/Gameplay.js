@@ -71,7 +71,7 @@ class Game {
   }
   autoPlaceCPUFleet() {
     fleet.forEach((fleetShip) => {
-      const ship = new Ship(fleetShip);
+      const ship = new Ship(fleetShip.length);
       let placed = false;
       while (!placed) {
         try {
