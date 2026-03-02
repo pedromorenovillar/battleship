@@ -109,6 +109,9 @@ function handleClick(e) {
 }
 
 function renderBoards() {
+  if (game.isGameOver) {
+    showGameOverMessage()
+  }
   updateBoard(playerBoardContainer, game.players[0].gameboard, true);
   updateBoard(CPUBoardContainer, game.players[1].gameboard, true);
   toggleBoardInteraction();
@@ -162,4 +165,14 @@ function updatePlacementInfo() {
   if (currentShipIndex < fleet.length) {
     directionInfo.textContent = `Colocarás un ${fleet[currentShipIndex].name} (${fleet[currentShipIndex].length} casillas) en ${currentDirection}.`;
   }
+}
+function showGameOverMessage() {
+  if(game.winner.isCPU) {
+    infoMsg.textContent = `Has perdido...`
+  } else {
+    infoMsg.textContent = '¡Has ganado!'
+  }
+  CPUBoardContainer.style.pointerEvents = "none"
+  playerBoardContainer.style.pointerEvents = "none"
+  resetBtn.disabled = false
 }
