@@ -86,13 +86,13 @@ function handleClick(e) {
   const col = Number(cell.dataset.col);
 
   game.attack(row, col);
+  renderBoards();
   if (game.currentPlayer.isCPU && !game.isGameOver) {
     setTimeout(() => {
       game.attack();
       renderBoards();
     }, 500);
   }
-  renderBoards();
 }
 
 function renderBoards() {
