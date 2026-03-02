@@ -28,16 +28,19 @@ h2,
   background: lightblue;
   border: 1px solid black;
   cursor: pointer;
+  display: flex;
+  color: white;
+  justify-content: center;
+  align-items: center;
 }
 
-#cpu-board .cell {
-  background-color: aquamarine;
-}
-
-#cpu-board .cell.ship {
+.cell.ship {
   background-color: red;
 }
 
-#player-board .cell.ship {
-  background-color: red;
+.cell.hit {
+  background-color: green;
+}
+.miss {
+  background-color: gray;
 }

@@ -64,8 +64,10 @@ function updateBoard(container, gameboard, showShips = false) {
 
     if (boardCell.isHit && boardCell.ship) {
       cell.classList.add("hit");
+      cell.textContent = "X"
     } else if (boardCell.isHit && !boardCell.ship) {
       cell.classList.add("miss");
+      cell.textContent = "X"
     } else if (showShips && boardCell.ship) {
       cell.classList.add("ship");
     }
@@ -97,7 +99,7 @@ function handleClick(e) {
 
 function renderBoards() {
   updateBoard(playerBoardContainer, game.players[0].gameboard, true);
-  updateBoard(CPUBoardContainer, game.players[1].gameboard, false);
+  updateBoard(CPUBoardContainer, game.players[1].gameboard, true);
   toggleBoardInteraction();
 }
 
