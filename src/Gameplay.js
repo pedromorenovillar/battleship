@@ -1,6 +1,6 @@
 import Player from "./Player.js";
 import Ship from "./Ship.js";
-export const fleet = [{name: "portaaviones", length: 5}, {name: "fragata", length: 4}, {name: "submarino", length: 3}, {name: "submarino", length: 3}, {name: "crucero", length: 2}];
+export const fleet = [{name: "portaaviones", length: 5}, {name: "buque", length: 4}, {name: "submarino", length: 3}, {name: "submarino", length: 3}, {name: "crucero", length: 2}];
 
 class Game {
   constructor() {
@@ -47,7 +47,7 @@ class Game {
         }
       } while (result === "hit");
       this.nextTurn(); // switch turn after miss
-      return;
+      return result;
     }
 
     // Human attack
@@ -56,12 +56,13 @@ class Game {
     if (opponent.gameboard.areAllShipsSunk()) {
       this.winner = this.currentPlayer;
       this.isGameOver = true;
-      return;
+      return result;
     }
 
     if (result === "miss") {
       this.nextTurn();
     }
+    return result
   }
   placeShip(player, ship, x, y, currentDirection = "horizontal") {
     if (this.isGameStarted === true) {

@@ -9,24 +9,17 @@ const game = new Game();
 let currentShipIndex = 0;
 let currentDirection = "horizontal";
 
-// Render boards
+// Grab HTML elements
 const playerBoardContainer = document.getElementById("player-board");
 const CPUBoardContainer = document.getElementById("cpu-board");
-const resetBtn = document.getElementById('reset-btn')
-resetBtn.disabled = true
-
-const infoMsg = document.getElementById('info-msg')
-const infoHeader = document.createElement("h2")
-infoHeader.textContent = `Para empezar, despliega tu flota haciendo clic en tu tablero.`
-const directionInfo = document.createElement("h4")
-directionInfo.textContent = `Posición: ${currentDirection}. Pulsa R para cambiar la dirección.`
-
-infoMsg.appendChild(infoHeader)
-infoMsg.appendChild(directionInfo)
+const resetBtn = document.getElementById("reset-btn");
+const infoMsg = document.getElementById("info-msg");
+resetBtn.disabled = true;
 
 createBoard(playerBoardContainer);
 createBoard(CPUBoardContainer);
 renderBoards();
+const directionInfo = renderInitialInfo();
 
 // Attach click listeners
 CPUBoardContainer.addEventListener("click", handleClick);
@@ -41,7 +34,7 @@ document.addEventListener("keydown", (event) => {
       currentDirection = "horizontal";
     }
   }
-  directionInfo.textContent = `Posición: ${currentDirection}. Pulsa R para cambiar la dirección.`
+  updatePlacementInfo();
 });
 
 // Update DOM after every move
@@ -76,10 +69,10 @@ function updateBoard(container, gameboard, showShips = false) {
 
     if (boardCell.isHit && boardCell.ship) {
       cell.classList.add("hit");
-      cell.textContent = "X"
+      cell.textContent = "X";
     } else if (boardCell.isHit && !boardCell.ship) {
       cell.classList.add("miss");
-      cell.textContent = "X"
+      cell.textContent = "X";
     } else if (showShips && boardCell.ship) {
       cell.classList.add("ship");
     }
@@ -99,7 +92,13 @@ function handleClick(e) {
   const row = Number(cell.dataset.row);
   const col = Number(cell.dataset.col);
 
-  game.attack(row, col);
+  const result = game.attack(row, col);
+  console.log("attack result:", result)
+  if (result === "hit") {
+    infoMsg.textContent = "¡Tocado!";
+  } else if (result === "miss") {
+    infoMsg.textContent = "¡Agua!";
+  }
   renderBoards();
   if (game.currentPlayer.isCPU && !game.isGameOver) {
     setTimeout(() => {
@@ -127,21 +126,40 @@ function placeShips(e) {
   try {
     const row = Number(e.target.dataset.row);
     const col = Number(e.target.dataset.col);
-    
+
     const ship = new Ship(fleet[currentShipIndex].length);
     game.placeShip(game.players[0], ship, row, col, currentDirection);
-    infoHeader.textContent = `¡Has desplegado un ${fleet[currentShipIndex].name}!`
     currentShipIndex++;
     if (currentShipIndex === fleet.length) {
       game.autoPlaceCPUFleet();
-      infoHeader.textContent = `¡Ahora ataca una casilla del tablero enemigo!`
-      directionInfo.remove()
       game.startGame();
       renderBoards();
+      infoMsg.textContent = `¡Ahora ataca el tablero enemigo!`;
       return;
     }
     renderBoards();
+    updatePlacementInfo();
   } catch (error) {
     console.error(error);
+  }
+}
+
+function renderInitialInfo() {
+  const infoHeader = document.createElement("h3");
+  infoHeader.textContent = `Para empezar, despliega tu flota haciendo clic en tu tablero.`;
+  infoMsg.appendChild(infoHeader);
+  const directionInfo = document.createElement("h4");
+  const directionChange = document.createElement("h5");
+  directionChange.textContent = `Pulsa R para cambiar la dirección.`;
+
+  directionInfo.textContent = `Colocarás un ${fleet[currentShipIndex].name} (${fleet[currentShipIndex].length} casillas) en ${currentDirection}.`;
+  infoMsg.appendChild(directionInfo);
+  infoMsg.appendChild(directionChange);
+  return directionInfo;
+}
+
+function updatePlacementInfo() {
+  if (currentShipIndex < fleet.length) {
+    directionInfo.textContent = `Colocarás un ${fleet[currentShipIndex].name} (${fleet[currentShipIndex].length} casillas) en ${currentDirection}.`;
   }
 }
