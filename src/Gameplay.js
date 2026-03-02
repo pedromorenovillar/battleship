@@ -1,6 +1,6 @@
 import Player from "./Player.js";
 import Ship from "./Ship.js";
-export const fleet = [5, 4, 3, 3, 2];
+export const fleet = [{name: "portaaviones", length: 5}, {name: "fragata", length: 4}, {name: "submarino", length: 3}, {name: "submarino", length: 3}, {name: "crucero", length: 2}];
 
 class Game {
   constructor() {

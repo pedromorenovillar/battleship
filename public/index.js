@@ -12,12 +12,14 @@ let currentDirection = "horizontal";
 // Render boards
 const playerBoardContainer = document.getElementById("player-board");
 const CPUBoardContainer = document.getElementById("cpu-board");
+const resetBtn = document.getElementById('reset-btn')
+resetBtn.disabled = true
 
 const infoMsg = document.getElementById('info-msg')
 const infoHeader = document.createElement("h2")
-infoHeader.textContent = `Para empezar, despliega la flota en el tablero del jugador.`
+infoHeader.textContent = `Para empezar, despliega tu flota haciendo clic en tu tablero.`
 const directionInfo = document.createElement("h4")
-directionInfo.textContent = `Posición: ${currentDirection}. Pulsa R para rotar el buque o haz clic en el tablero para colocarlo.`
+directionInfo.textContent = `Posición: ${currentDirection}. Pulsa R para cambiar la dirección.`
 
 infoMsg.appendChild(infoHeader)
 infoMsg.appendChild(directionInfo)
@@ -39,7 +41,7 @@ document.addEventListener("keydown", (event) => {
       currentDirection = "horizontal";
     }
   }
-  directionInfo.textContent = `Posición: ${currentDirection}. Pulsa R para rotar el buque o haz clic en el tablero para colocarlo.`
+  directionInfo.textContent = `Posición: ${currentDirection}. Pulsa R para cambiar la dirección.`
 });
 
 // Update DOM after every move
@@ -126,8 +128,9 @@ function placeShips(e) {
     const row = Number(e.target.dataset.row);
     const col = Number(e.target.dataset.col);
     
-    const ship = new Ship(fleet[currentShipIndex]);
+    const ship = new Ship(fleet[currentShipIndex].length);
     game.placeShip(game.players[0], ship, row, col, currentDirection);
+    infoHeader.textContent = `¡Has desplegado un ${fleet[currentShipIndex].name}!`
     currentShipIndex++;
     if (currentShipIndex === fleet.length) {
       game.autoPlaceCPUFleet();
