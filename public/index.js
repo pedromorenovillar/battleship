@@ -111,11 +111,12 @@ function handleClick(e) {
 }
 
 function renderBoards() {
+  const showCPUShips = game.isGameOver;
   if (game.isGameOver) {
     showGameOverMessage();
   }
   updateBoard(playerBoardContainer, game.players[0].gameboard, true);
-  updateBoard(CPUBoardContainer, game.players[1].gameboard, true);
+  updateBoard(CPUBoardContainer, game.players[1].gameboard, showCPUShips);
   toggleBoardInteraction();
 }
 
