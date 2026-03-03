@@ -151,11 +151,11 @@ function placeShips(e) {
 }
 
 function renderInitialInfo() {
-  const infoHeader = document.createElement("h3");
+  const infoHeader = document.createElement("h4");
   infoHeader.textContent = `Para empezar, despliega tu flota haciendo clic en tu tablero.`;
   infoMsg.appendChild(infoHeader);
-  const directionInfo = document.createElement("h4");
-  const directionChange = document.createElement("h5");
+  const directionInfo = document.createElement("div");
+  const directionChange = document.createElement("div");
   directionChange.textContent = `Pulsa R para cambiar la dirección.`;
 
   directionInfo.textContent = `Colocarás un ${fleet[currentShipIndex].name} (${fleet[currentShipIndex].length} casillas) en ${currentDirection}.`;
