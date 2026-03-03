@@ -1,10 +1,9 @@
-import Gameboard from "../src/Gameboard.js";
 import Game from "../src/Gameplay.js";
 import Ship from "../src/Ship.js";
 import { fleet } from "../src/Gameplay.js";
 
 // Create a new Game
-const game = new Game();
+let game = new Game();
 
 let currentShipIndex = 0;
 let currentDirection = "horizontal";
@@ -19,11 +18,12 @@ resetBtn.disabled = true;
 createBoard(playerBoardContainer);
 createBoard(CPUBoardContainer);
 renderBoards();
-const directionInfo = renderInitialInfo();
+let directionInfo = renderInitialInfo();
 
 // Attach click listeners
 CPUBoardContainer.addEventListener("click", handleClick);
 playerBoardContainer.addEventListener("click", placeShips);
+resetBtn.addEventListener("click", restartGame)
 document.addEventListener("keydown", (event) => {
   const keyName = event.key;
 
@@ -64,6 +64,7 @@ function updateBoard(container, gameboard, showShips = false) {
 
     const boardCell = gameboard.board[row][col];
     cell.classList.remove("hit", "miss", "ship");
+    cell.textContent = ""
     if (boardCell.ship) {
     }
 
@@ -92,7 +93,6 @@ function handleClick(e) {
   const col = Number(cell.dataset.col);
 
   const result = game.attack(row, col);
-  console.log("attack result:", result)
   if (result === "hit") {
     infoMsg.textContent = "¡Tocado!";
   } else if (result === "miss") {
@@ -109,7 +109,7 @@ function handleClick(e) {
 
 function renderBoards() {
   if (game.isGameOver) {
-    showGameOverMessage()
+    showGameOverMessage();
   }
   updateBoard(playerBoardContainer, game.players[0].gameboard, true);
   updateBoard(CPUBoardContainer, game.players[1].gameboard, true);
@@ -166,12 +166,33 @@ function updatePlacementInfo() {
   }
 }
 function showGameOverMessage() {
-  if(game.winner.isCPU) {
-    infoMsg.textContent = `Has perdido...`
+  if (game.winner.isCPU) {
+    infoMsg.textContent = `Has perdido...`;
   } else {
-    infoMsg.textContent = '¡Has ganado!'
+    infoMsg.textContent = "¡Has ganado!";
   }
-  CPUBoardContainer.style.pointerEvents = "none"
-  playerBoardContainer.style.pointerEvents = "none"
-  resetBtn.disabled = false
+  CPUBoardContainer.style.pointerEvents = "none";
+  playerBoardContainer.style.pointerEvents = "none";
+  resetBtn.disabled = false;
+}
+function restartGame() {
+  // Recreate game
+  game = new Game();
+
+  // Reset placement variables
+  currentShipIndex = 0;
+  currentDirection = "horizontal";
+
+  // Re-enable interactions
+  playerBoardContainer.style.pointerEvents = "auto";
+  CPUBoardContainer.style.pointerEvents = "auto";
+
+  // Disable reset button
+  resetBtn.disabled = true
+
+  // Clear info container
+  infoMsg.innerHTML = ""
+
+  directionInfo = renderInitialInfo()
+  renderBoards()
 }
