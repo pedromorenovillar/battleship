@@ -81,11 +81,10 @@ function updateBoard(container, gameboard, showShips = false) {
 
 function handleClick(e) {
   const cell = e.target;
-
   // Ignore click if not .cell class
   if (!cell.classList.contains("cell")) return;
-  // Ignore click on game over
-  if (game.isGameOver) return;
+  // Ignore click on game over or before game start
+  if (game.isGameOver || !game.isGameStarted) return;
   // Ignore click on CPU's turn
   if (game.currentPlayer.isCPU) return;
 
