@@ -97,7 +97,10 @@ function handleClick(e) {
     infoMsg.textContent = "¡Tocado!";
   } else if (result === "miss") {
     infoMsg.textContent = "¡Agua!";
+  } else if (result === "already") {
+    infoMsg.textContent = "Ya has atacado ese punto. ¡Ataca otro!"
   }
+  clearInfoMsg()
   renderBoards();
   if (game.currentPlayer.isCPU && !game.isGameOver) {
     setTimeout(() => {
@@ -195,4 +198,9 @@ function restartGame() {
 
   directionInfo = renderInitialInfo()
   renderBoards()
+}
+function clearInfoMsg() {
+  setTimeout(() => {
+    infoMsg.textContent = " "
+  }, 1000);
 }
