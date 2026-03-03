@@ -2,7 +2,7 @@
 
 ## Assignment Overview
 
-This project is part of The Odin Project's JavaScript curriculum. The goal is to build a **Battleship game** using **Test-Driven Development (TDD)**. You will implement the game logic, gameboard, and ships, focusing on writing tests first and then writing the code to pass them.
+This project is part of The Odin Project's JavaScript curriculum. The goal is to build a **Battleship game** using **Test-Driven Development (TDD)**. I implemented the game logic, gameboard, and ships, focusing on writing tests first and then writing the code to pass them.
 
 ## Learning Goals
 
@@ -33,18 +33,28 @@ This project is part of The Odin Project's JavaScript curriculum. The goal is to
    - Write tests for each module before implementing functionality.
    - Use **Jest** or a testing framework of your choice.
 
-## Suggested Modules
+## Modules
 
 - `Ship` – represents a ship, tracks its length and hits.
 - `Gameboard` – stores ships and attacks, handles placement and strikes.
 - `Player` – can attack other players' boards.
-- `index.js` – optional, for integrating everything.
+- `Gameplay` – game logic.
+- `index.js` – integrates everything.
 
 ## Optional Enhancements
 
-- Random ship placement.
-- Simple UI in the console or browser.
-- AI opponent with basic strategy.
+- Random ship placement for CPU.
+- Simple UI in the browser.
+- AI opponent with basic strategy (hunting mode).
+
+## AI Use
+
+I have used AI tools (Claude Code and ChatGPT) in a  limited way, never asking for full solutions; instead asking for help with:
+
+- Arquitecture guiding questions
+- State debugging
+- Refactoring code to separate rendering from logic
+- Reasoning about flow
 
 ## Resources
 
