@@ -151,7 +151,7 @@ function placeShips(e) {
 }
 
 function renderInitialInfo() {
-  const infoHeader = document.createElement("h4");
+  const infoHeader = document.createElement("h2");
   infoHeader.textContent = `Para empezar, despliega tu flota haciendo clic en tu tablero.`;
   infoMsg.appendChild(infoHeader);
   const directionInfo = document.createElement("div");
