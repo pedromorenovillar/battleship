@@ -1,5 +1,13 @@
 # Battleship Game
 
+## Screenshot
+
+![Project Screenshot](./public/images/battleship.png)
+
+## Live Demo
+
+[View Live Game](https://pedromorenovillar.github.io/battleship/public/)
+
 ## About This Project
 
 This project is part of The Odin Project's JavaScript curriculum. The goal was to build a fully-functional **Battleship game** using **Test-Driven Development (TDD)** principles. I implemented the complete game logic, gameboard system, and ship mechanics focusing on writing tests first, then implementing code to pass them.
@@ -25,7 +33,7 @@ This project is part of The Odin Project's JavaScript curriculum. The goal was t
 
 ## Project Structure
 
-```
+```bash
 battleship/
 │
 ├── src/
@@ -41,6 +49,8 @@ battleship/
 │   └── Gameplay.test.js
 │
 ├── public/
+│   ├── images/
+│   │   └── battleship.png
 │   ├── index.html
 │   ├── index.js
 │   └── styles.css
@@ -61,14 +71,13 @@ battleship/
 ## Future Improvements
 
 - Implement AI opponent with strategic hit patterns
-- Build interactive browser UI for actual gameplay
-- Optimize algorithm for ship placement validation
+- Build interactive browser UI for fleet deployment
 
 ## Acknowledgements
 
 Project assignment and curriculum from:
 
-- [The Odin Project](https://www.theodinproject.com/)
+- [The Odin Project](https://www.theodinproject.com/lessons/node-path-javascript-battleship)
 - [Jest Documentation](https://jestjs.io/docs/getting-started)
 - [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 
