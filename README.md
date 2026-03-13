@@ -1,62 +1,77 @@
-# Battleship Project
+# Battleship Game
 
-## Assignment Overview
+## About This Project
 
-This project is part of The Odin Project's JavaScript curriculum. The goal is to build a **Battleship game** using **Test-Driven Development (TDD)**. I implemented the game logic, gameboard, and ships, focusing on writing tests first and then writing the code to pass them.
+This project is part of The Odin Project's JavaScript curriculum. The goal was to build a fully-functional **Battleship game** using **Test-Driven Development (TDD)** principles. I implemented the complete game logic, gameboard system, and ship mechanics focusing on writing tests first, then implementing code to pass them.
 
-## Learning Goals
+## Features
 
-- Understand TDD and practice writing tests with Jest.
-- Use JavaScript modules for organizing code.
-- Apply object-oriented programming concepts (factories, classes, etc.).
-- Implement game logic with clear separation of concerns.
-- Handle edge cases and invalid input gracefully.
+- **Test-Driven Development**: Comprehensive test suite built with Jest covering all game logic
+- **Gameboard System**: 10x10 grid with intelligent ship placement validation
+- **Ship Mechanics**: Track hits, determine sunken ships, and handle edge cases
+- **Player Management**: Multi-player turn-based gameplay system
+- **Input Validation**: Prevent overlapping ships and invalid placements
+- **Modular Architecture**: Clean separation of concerns with ES6 modules
 
-## Requirements
+## Built With
 
-1. **Gameboard**
-   - Represent a 10x10 grid.
-   - Place ships at specified coordinates (horizontal or vertical).
-   - Prevent ships from overlapping or going off the board.
-   - Track missed and hit attacks.
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
 
-2. **Ships**
-   - Have a length property.
-   - Track hits and determine when sunk.
-   - Must respond correctly to attacks.
+![Jest](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
 
-3. **Gameplay**
-   - Allow players to take turns attacking each other’s boards.
-   - End the game when all ships of one player are sunk.
+![ES6 Modules](https://img.shields.io/badge/ES6%20Modules-Advanced-blue?style=for-the-badge)
 
-4. **Test-Driven Development**
-   - Write tests for each module before implementing functionality.
-   - Use **Jest** or a testing framework of your choice.
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 
-## Modules
+## Project Structure
 
-- `Ship` – represents a ship, tracks its length and hits.
-- `Gameboard` – stores ships and attacks, handles placement and strikes.
-- `Player` – can attack other players' boards.
-- `Gameplay` – game logic.
-- `index.js` – integrates everything.
+```
+battleship/
+│
+├── src/
+│   ├── Ship.js          – Ship class with hit tracking
+│   ├── Gameboard.js     – 10x10 grid and attack management
+│   ├── Player.js        – Player logic and board management
+│   └── Gameplay.js      – Turn-based game flow
+│
+├── tests/
+│   ├── Ship.test.js
+│   ├── Gameboard.test.js
+│   ├── Player.test.js
+│   └── Gameplay.test.js
+│
+├── public/
+│   ├── index.html
+│   ├── index.js
+│   └── styles.css
+│
+└── README.md
+```
 
-## Optional Enhancements
+## What I Learned
 
-- Random ship placement for CPU.
-- Simple UI in the browser.
-- AI opponent with basic strategy (hunting mode).
+- Writing effective unit tests using **Jest** before implementing features (TDD methodology)
+- Modularizing JavaScript code with ES6 imports/exports for maintainability
+- Object-oriented design patterns including classes
+- Handling complex game state management and edge cases
+- Organizing larger projects with clear separation of concerns
+- Validating data and preventing invalid state transitions
+- Standarizing commit messages using the Conventional Commits specification
 
-## AI Use
+## Future Improvements
 
-I have used AI tools (Claude Code and ChatGPT) in a  limited way, never asking for full solutions; instead asking for help with:
+- Implement AI opponent with strategic hit patterns
+- Build interactive browser UI for actual gameplay
+- Optimize algorithm for ship placement validation
 
-- Arquitecture guiding questions
-- State debugging
-- Refactoring code to separate rendering from logic
-- Reasoning about flow
+## Acknowledgements
 
-## Resources
+Project assignment and curriculum from:
 
-- [The Odin Project – Battleship Lesson](https://www.theodinproject.com/lessons/node-path-javascript-battleship)
+- [The Odin Project](https://www.theodinproject.com/)
 - [Jest Documentation](https://jestjs.io/docs/getting-started)
+- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+
+## Author
+
+GitHub: [Pedro José Moreno Villar](https://github.com/pedromorenovillar)
